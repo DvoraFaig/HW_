@@ -11,8 +11,6 @@ namespace ObserverSystem
         public int AerialRange { 
             get; 
             set;  
-            /*  get { return AerialRange; }
-              set  { VisionField = value % 360; }*/
         }
         public int VisionField { get; set; }
 

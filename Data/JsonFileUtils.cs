@@ -40,15 +40,16 @@ namespace Data
         {
             try
             {
-                StreamReader r = new StreamReader(pathFile);
-                string jsonString = r.ReadToEnd();
-                //List<ObservationData> observationList = JsonConvert.DeserializeObject<List<ObservationData>>(jsonString);
-                //List<ObservationData> observationList = System.Text.Json.JsonSerializer.Deserialize<List<ObservationData>>(jsonString);
-                var observationList = System.Text.Json.JsonSerializer.Deserialize<List<ObservationData>>(jsonString);
-                                        //var movieList = JsonSerializer.Deserialize<List<Movie>>(json);
+                if (File.Exists(pathFile))
+                {
+                    StreamReader r = new StreamReader(pathFile);
+                    string jsonString = r.ReadToEnd();
+                    List<ObservationData> observationList = System.Text.Json.JsonSerializer.Deserialize<List<ObservationData>>(jsonString);
 
-                r.Close();
-                return observationList;
+                    r.Close();
+                    return observationList;
+                }
+                else { return new List<ObservationData>(); }
             }
             catch (Exception e)
             {

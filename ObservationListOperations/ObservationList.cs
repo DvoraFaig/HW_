@@ -22,7 +22,7 @@ namespace ObserverSystem
         new Lazy<ObservationList>(() => new ObservationList());
         public static ObservationList Instance { get { return lazy.Value; } }
         #endregion
-        
+
         private ObservationList()
         {
             try
@@ -31,12 +31,9 @@ namespace ObserverSystem
                 meansObservations = new List<MeansObservation>();
                 foreach (var item in data)
                 {
-                    meansObservations.Add(new MeansObservation(item.Type, item.AerialRange, item.VisionField));
+                    meansObservations.Add(new MeansObservation((ObservationType)item.Type, item.AerialRange, item.VisionField));
                 }
             }
-            /*catch (UnableAccessDataException e) {
-                throw e;
-            }*/
             catch (Exception)
             {
 
@@ -91,8 +88,7 @@ namespace ObserverSystem
         public List<MeansObservation> GetSortedByRange()
         {
             List<MeansObservation> objectsToSort = GetAll();
-            objectsToSort.Sort();
-            return objectsToSort;
+            return objectsToSort.OrderBy(ob => ob.VisionField).ToList();
         }
         public MeansObservation GetMaxObservationWithMinVisionField(int minVisionField)
         {

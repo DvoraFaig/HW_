@@ -9,7 +9,7 @@ namespace Data
 {
     public class ObservationData
     {
-        public ObservationType Type { get; set; }
+        public int Type { get; set; }
         public int AerialRange { get; set; }
         public int VisionField { get; set; }
     }
