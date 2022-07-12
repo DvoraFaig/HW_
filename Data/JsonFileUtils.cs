@@ -42,11 +42,15 @@ namespace Data
             {
                 StreamReader r = new StreamReader(pathFile);
                 string jsonString = r.ReadToEnd();
-                List<ObservationData> observationList = JsonConvert.DeserializeObject<List<ObservationData>>(jsonString);
+                //List<ObservationData> observationList = JsonConvert.DeserializeObject<List<ObservationData>>(jsonString);
+                //List<ObservationData> observationList = System.Text.Json.JsonSerializer.Deserialize<List<ObservationData>>(jsonString);
+                var observationList = System.Text.Json.JsonSerializer.Deserialize<List<ObservationData>>(jsonString);
+                                        //var movieList = JsonSerializer.Deserialize<List<Movie>>(json);
+
                 r.Close();
                 return observationList;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new UnableAccessDataException("Thomethin went wrong. please try later");
             }

@@ -16,7 +16,8 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            observationList = ObservationList.Instance;
+            try { observationList = ObservationList.Instance; }
+            catch (Exception e) { Console.WriteLine(e.Message); }
             continueUserChoosing = false;
             do
             {

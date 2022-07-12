@@ -34,8 +34,12 @@ namespace ObserverSystem
                     meansObservations.Add(new MeansObservation(item.Type, item.AerialRange, item.VisionField));
                 }
             }
-            catch (UnableAccessDataException e) {
+            /*catch (UnableAccessDataException e) {
                 throw e;
+            }*/
+            catch (Exception)
+            {
+
             }
         }
 
