@@ -2,6 +2,8 @@
 using ObserverSystem;
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
+using dataExceptions;
 
 namespace ConsoleUI
 {
@@ -99,6 +101,11 @@ namespace ConsoleUI
                     Console.WriteLine("Error: invalid observation type... try again");
                     inputIsfalse = true;
                 }
+                catch (UnableAccessDataException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (Exception) { }
             } while (inputIsfalse);
         }
 
@@ -123,6 +130,12 @@ namespace ConsoleUI
                     Console.WriteLine("observation not exist. please try again");
                     inputIsfalse = true;
                 }
+                catch (UnableAccessDataException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (Exception) { }
+                
 
             } while (inputIsfalse);
         }

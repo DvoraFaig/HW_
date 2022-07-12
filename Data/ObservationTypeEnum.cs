@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObserverSystem
+namespace Enums
 {
     public enum ObservationType { a,b,c};
 }

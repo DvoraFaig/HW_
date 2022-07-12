@@ -6,6 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Data;
+using Enums;
+using dataExceptions;
+
 
 namespace ObserverSystem
 {
@@ -13,25 +17,62 @@ namespace ObserverSystem
     {
         private List<MeansObservation> meansObservations;
 
+        #region singlton
         private static readonly Lazy<ObservationList> lazy =
         new Lazy<ObservationList>(() => new ObservationList());
         public static ObservationList Instance { get { return lazy.Value; } }
-
+        #endregion
+        
         private ObservationList()
         {
-            meansObservations = new List<MeansObservation>();
+            try
+            {
+                List<ObservationData> data = JsonFileUtils.Read();
+                meansObservations = new List<MeansObservation>();
+                foreach (var item in data)
+                {
+                    meansObservations.Add(new MeansObservation(item.Type, item.AerialRange, item.VisionField));
+                }
+            }
+            catch (UnableAccessDataException e) {
+                throw e;
+            }
         }
 
         public void AddObserver(int type, int range, int visionField) 
         {
-            MeansObservation newObject = new MeansObservation((ObservationType)type, range, visionField);
-            meansObservations.Add(newObject);
+            try
+            {
+                MeansObservation newObject = new MeansObservation((ObservationType)type, range, visionField);
+                meansObservations.Add(newObject);
+                updateData();
+            }
+            catch (UnableAccessDataException e)
+            {
+                throw e;
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void DeleteObservation(int index) 
         {
-            MeansObservation deletedObject = meansObservations[index];
-            meansObservations.Remove(deletedObject);
+            try
+            {
+                MeansObservation deletedObject = meansObservations[index];
+                meansObservations.Remove(deletedObject);
+                updateData();
+            }
+            catch (UnableAccessDataException e)
+            {
+                throw e;
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         public List<MeansObservation> GetAll()
         {
@@ -66,6 +107,18 @@ namespace ObserverSystem
                 clonedList.Add((MeansObservation)item.Clone());
             }
             return clonedList;
+        }
+
+        private void updateData()
+        {
+            try
+            {
+                JsonFileUtils.Write(meansObservations);
+            }
+            catch (UnableAccessDataException e)
+            {
+                throw e;
+            }
         }
     }
 }
