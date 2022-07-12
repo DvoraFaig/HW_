@@ -1,0 +1,22 @@
+﻿<Window x:Class="GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="250">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button Content="Add" HorizontalAlignment="Left" Height="42" Margin="74,31,0,0" VerticalAlignment="Top" Width="97" Click="AddButton_Click"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Height="42" Margin="74,96,0,0" VerticalAlignment="Top" Width="97" Click="DeleteButton_Click"/>
+        <Button Content="Show all" HorizontalAlignment="Left" Height="42" Margin="74,164,0,0" VerticalAlignment="Top" Width="97" Click="ShowButton_Click"/>
+        <Button Content="Show by specific type" HorizontalAlignment="Left" Height="42" Margin="74,229,0,0" VerticalAlignment="Top" Width="97" Click="ShowSpecificButton_Click"/>
+        <Button Content="Show sorted" HorizontalAlignment="Left" Height="42" Margin="74,301,0,0" VerticalAlignment="Top" Width="97" Click="ShowSortedButton_Click"/>
+        <Button Content="Show max" HorizontalAlignment="Left" Height="42" Margin="74,366,0,0" VerticalAlignment="Top" Width="97" Click="ShowMaxButton_Click"/>
+
+    </Grid>
+</Window>
